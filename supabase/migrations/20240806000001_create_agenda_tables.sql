@@ -1,0 +1,2 @@
+-- This file is replaced by the new comprehensive initial_schema.sql
+-- It is now empty to avoid conflicts.
