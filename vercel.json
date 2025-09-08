@@ -7,7 +7,7 @@
   "regions": ["iad1"],
   "functions": {
     "src/app/api/**/*.ts": {
-      "runtime": "nodejs20.x"
+      "runtime": "20.x"
     }
   },
   "rewrites": [
