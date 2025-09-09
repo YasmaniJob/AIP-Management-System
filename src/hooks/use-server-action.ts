@@ -4,11 +4,13 @@
 
 import { useTransition } from 'react';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export type ServerActionResult<T = any> = {
   success: boolean;
   error?: string;
   data?: T;
+  redirect?: string;
 };
 
 type ServerAction<T extends any[]> = (...args: T) => Promise<ServerActionResult>;
@@ -23,6 +25,7 @@ export function useServerAction<T extends any[]>(
   }
 ) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const execute = (...args: T) => {
     startTransition(async () => {
@@ -33,6 +36,12 @@ export function useServerAction<T extends any[]>(
           if (options?.successMessage) {
             toast.success(options.successMessage);
           }
+          
+          // Manejar redirección del lado del cliente
+          if (result.redirect) {
+            router.push(result.redirect);
+          }
+          
           // Pasar el resultado completo, no solo result.data
           options?.onSuccess?.(result);
         } else {

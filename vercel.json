@@ -5,11 +5,7 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev",
   "regions": ["iad1"],
-  "functions": {
-    "src/app/api/**/*.ts": {
-      "runtime": "20.x"
-    }
-  },
+
   "rewrites": [
     {
       "source": "/api/(.*)",

@@ -1,9 +1,9 @@
 // src/app/page.tsx
-import { redirect } from 'next/navigation';
 import { LoginPageClient } from '@/components/auth/login-page-client';
 import { createServerClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import { getSystemSettings } from '@/lib/data/settings';
+import { RedirectToDashboard } from '@/components/auth/redirect-to-dashboard';
 
 // Evitar prerendering estático debido al uso de cookies
 export const dynamic = 'force-dynamic';
@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     const { data: user } = await supabase.from('users').select('id').eq('id', userId).single();
     
     if (user) {
-      redirect('/dashboard');
+      return <RedirectToDashboard />;
     }
     // If user doesn't exist in database, clear the cookie and show login form
   }

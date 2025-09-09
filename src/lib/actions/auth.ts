@@ -30,8 +30,7 @@ export async function loginAction(values: z.infer<typeof loginSchema>) {
             maxAge: 60 * 60 * 24, // 1 day
         });
         
-        // Redirect to dashboard after successful login
-        redirect('/dashboard');
+        return { success: true, redirect: '/dashboard' };
     }
 
     return { success: true };
@@ -163,5 +162,5 @@ export async function registerAction(values: z.infer<typeof registerSchema>) {
     // Usuario registrado exitosamente, redirigir al login
     // No establecemos cookie automáticamente - el usuario debe iniciar sesión
     
-    redirect('/?registered=true');
+    return { success: true, redirect: '/?registered=true' };
 }
